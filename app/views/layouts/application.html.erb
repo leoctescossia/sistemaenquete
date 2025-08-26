@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Sistema de Enquetes" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js", defer: true %>
+
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/book-album-svgrepo-com.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <!--- Verifica se é a página de login --->
+    <% if devise_controller? && action_name == 'new' && controller_name == 'sessions' %>
+      <%= yield %>
+    <% else %>
+      <main class="container mx-auto mt-28 px-5 flex">
+        <!-- Sidebar -->
+        <div class="w-full md:w-1/4 bg-white rounded-xl shadow-md p-6 h-fit">
+          <div class="text-center mb-8">
+            <div class="mx-auto w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center mb-4">
+              <i class="fas fa-poll text-white text-2xl"></i>
+            </div>
+            <h2 class="text-xl font-bold text-gray-800">Sistema de Enquetes</h2>
+            <p class="text-gray-600 text-sm mt-2">Painel de controle</p>
+          </div>
+
+          <nav class="space-y-2">
+            <%= link_to root_path, class: 'flex items-center p-3 text-gray-700 hover:bg-orange-100 rounded-lg' do %>
+              <i class="fas fa-house mr-2"></i> Início
+            <% end %>
+            <%= link_to polls_path, class: 'flex items-center p-3 text-gray-700 hover:bg-orange-100 rounded-lg' do %>
+              <i class="fas fa-poll mr-2"></i> Acessar Enquetes
+            <% end %>
+
+            <% if user_signed_in? && !admin_signed_in? %>
+              <%= link_to my_polls_path, class: 'flex items-center p-3 text-gray-700 hover:bg-orange-100 rounded-lg' do %>
+                <i class="fas fa-user mr-2"></i> Acessar suas enquetes
+              <% end %>
+            <% end %>
+
+            <% if user_signed_in? && !admin_signed_in? %>
+              <%= link_to meus_votos_polls_path, class: 'flex items-center p-3 text-gray-700 hover:bg-orange-100 rounded-lg' do %>
+                <i class="fas fa-users mr-2"></i> Acessar suas enquetes votadas
+              <% end %>
+            <% end %>
+
+            <% if admin_signed_in? %>
+            
+              <%= link_to users_path, class: 'flex items-center p-3 text-gray-700 hover:bg-orange-100 rounded-lg' do %>
+                <i class="fas fa-users mr-2"></i> Acessar Usuários
+              <% end %>
+            <% end %>
+            
+            <a href="https://github.com/leoctescossia" class="flex items-center p-3 text-gray-700 hover:bg-orange-100 rounded-lg">
+              <i class="fas fa-question-circle text-gray-500 mr-3"></i>
+              <span>Documentação/Manual</span>
+            </a>
+            
+          </nav>
+
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <% if user_signed_in? %>
+              <div class="flex items-center">
+                  <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-user text-gray-600"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-800"><%= current_user.name %></p>
+                    <p class="text-xs text-gray-500"><%= current_user.email %></p>
+                    <p class="text-xs text-gray-500">Role: <%= current_user.role %></p>
+                  </div>
+              </div>
+                <%= button_to "Sair", destroy_user_session_path, method: :delete, class: 'block mt-4 text-sm text-center text-orange-600 hover:text-orange-700 cursor-pointer' %>   
+              </div>
+
+                <div class="text-sm p-3 mt-6">
+                  <span>Desenvolvido por:</span>
+                  
+                  <a href="https://github.com/leoctescossia" class="text-orange-500 underline">
+                    <span>Leonardo Escossia</span>
+                  </a>
+                </div>
+            <% end %>
+          </div>
+          
+        <%= yield %>
+
+        
+      </main>
+    <% end %>
+  </body>
+</html>

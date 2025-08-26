@@ -1,0 +1,83 @@
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <% if notice %>
+    <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+      <p class="text-green-800"><%= notice %></p>
+    </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-4 rounded">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <i class="fas fa-exclamation-circle text-red-400"></i>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-red-700"><%= flash[:alert] %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">Enquetes</h1>
+
+    <div class="flex space-x-2 items-center">
+      <%= link_to "Todas", polls_path, 
+            class: "px-4 py-2 rounded-lg #{params[:status].blank? ? 'bg-orange-500 text-white' : 'bg-gray-100 hover:bg-gray-200'}" %>
+
+      <%= link_to "Abertas", polls_path(status: :open), 
+            class: "px-4 py-2 rounded-lg #{params[:status] == 'open' ? 'bg-orange-500 text-white' : 'bg-gray-100 hover:bg-gray-200'}" %>
+
+      <%= link_to "Fechadas", polls_path(status: :closed), 
+            class: "px-4 py-2 rounded-lg #{params[:status] == 'closed' ? 'bg-orange-500 text-white' : 'bg-gray-100 hover:bg-gray-200'}" %>
+    </div>
+
+    <% if !admin_signed_in? %>
+      <%= link_to new_poll_path, class: "inline-flex items-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200" do %>
+        <i class="fas fa-plus mr-2"></i> Nova Enquete
+      <% end %>
+    <% end %>
+
+  </div>
+
+
+
+  <div id="polls" class="grid grid-cols-1 gap-6">
+    <% @polls.each do |poll| %>
+      <%= render poll %>
+    <% end %>
+  </div>
+
+  <% if @polls.empty? %>
+    <div class="text-center py-12 shadow-sm rounded-lg p-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
+        <i class="fas fa-poll text-gray-400 text-2xl"></i>
+      </div>
+      <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhuma enquete encontrada</h3>
+      <p class="text-gray-500">Comece criando sua primeira enquete.</p>
+    </div>
+  <% end %>
+
+  <!-- Paginação -->
+  <div class="flex justify-center mt-6 space-x-2">
+    <% if @current_page > 1 %>
+      <%= link_to "« Anterior", polls_path(page: @current_page - 1), 
+            class: "px-3 py-1 border rounded bg-gray-100 hover:bg-gray-200" %>
+    <% end %>
+
+    <% (1..@total_pages).each do |page| %>
+      <% if page == @current_page %>
+        <span class="px-3 py-1 border rounded bg-blue-500 text-white"><%= page %></span>
+      <% else %>
+        <%= link_to page, polls_path(page: page), 
+              class: "px-3 py-1 border rounded bg-gray-100 hover:bg-gray-200" %>
+      <% end %>
+    <% end %>
+
+    <% if @current_page < @total_pages %>
+      <%= link_to "Próxima »", polls_path(page: @current_page + 1), 
+            class: "px-3 py-1 border rounded bg-gray-100 hover:bg-gray-200" %>
+    <% end %>
+  </div>
+</div>
+

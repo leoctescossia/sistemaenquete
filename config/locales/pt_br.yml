@@ -1,0 +1,5 @@
+pt-BR:
+  activerecord:
+    attributes:
+      poll:
+        title: "Título da enquete"

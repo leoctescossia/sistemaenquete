@@ -1,0 +1,109 @@
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <!-- Cabeçalho -->
+  <div class="flex items-center mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">Detalhes do Usuário</h1>
+  </div>
+
+  <!-- Card de Informações -->
+  <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 mb-6">
+    <div class="bg-gradient-to-r from-orange-500 to-amber-600 h-2"></div>
+    <div class="p-6">
+      <div class="flex items-center mb-6">
+        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+          <i class="fas fa-user text-orange-600 text-2xl"></i>
+        </div>
+        <div>
+          <h2 class="text-2xl font-semibold text-gray-800"><%= @user.name %></h2>
+          <p class="text-gray-600">ID: #<%= @user.id %></p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Informações Pessoais -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-medium text-gray-800 border-b border-gray-200 pb-2">Informações</h3>
+          
+          <div>
+            <p class="text-sm font-medium text-gray-500">Email</p>
+            <p class="text-gray-800"><%= @user.email %></p>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-gray-500">Status</p>
+            <p class="text-gray-800"><%= @user.active === true ? 'Ativo' : 'Inativo' %></p>
+
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-gray-500">Função</p>
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
+              <%= @user.admin? ? 'bg-orange-100 text-orange-800' : 'bg-blue-100 text-blue-800' %>">
+              <i class="fas <%= @user.admin? ? 'fa-crown' : 'fa-user' %> mr-2"></i>
+              <%= @user.role %>
+            </span>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-gray-500">Data de Criação</p>
+            <p class="text-gray-800"><%= l(@user.created_at, format: :long) %></p>
+          </div>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-medium text-gray-800 border-b border-gray-200 pb-2">Estatísticas</h3>
+          
+          <div>
+            <p class="text-sm font-medium text-gray-500">Total de Enquetes</p>
+            <p class="text-2xl font-bold text-gray-800"><%= @user.polls.count %></p>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-gray-500">Enquetes Ativas</p>
+            <p class="text-2xl font-bold text-green-600"><%= @user.polls.where(status: 'open').count %></p>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-gray-500">Enquetes Fechadas</p>
+            <p class="text-2xl font-bold text-gray-600"><%= @user.polls.where(status: 'closed').count %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ações -->
+  <div class="bg-white rounded-xl shadow-md p-6">
+    <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <%= link_to edit_user_path(@user), class: "flex items-center justify-center px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors duration-300" do %>
+          <i class="fas fa-edit mr-2"></i> Editar Usuário
+        <% end %>
+        
+        <%= link_to users_path, class: "flex items-center justify-center px-4 py-2 border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium rounded-lg transition-colors duration-300" do %>
+          <i class="fas fa-users mr-2"></i> Ver Todos Usuários
+        <% end %>
+      </div>
+      
+
+      <% if current_user.role == 'admin' && @user.active? %>
+        <%= button_to inativar_usuario_user_path(@user), method: :patch, 
+            data: { turbo_confirm: "Tem certeza que deseja inativar este usuário? Todas as enquetes serão fechadas." }, 
+            class: "flex items-center justify-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors duration-300 cursor-pointer" do %>
+          <i class="fas fa-trash mr-2"></i> Inativar Usuário
+        <% end %>
+      <% end %>
+
+      <% if current_user.role == 'admin' && !@user.active? %>
+        <%= button_to ativar_usuario_user_path(@user), method: :patch, 
+            data: { turbo_confirm: "Deseja reativar esse usuário?" }, 
+            class: "flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-300 cursor-pointer" do %>
+          <i class="fas fa-plus mr-2"></i> Ativar Usuário
+        <% end %>
+      <% end %>
+
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,99 @@
+<div>
+  <%= form_with(model: poll, class: "space-y-6") do |form| %>
+    <% if poll.errors.any? %>
+      <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded mb-6">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <i class="fas fa-exclamation-circle text-red-400 mt-0.5"></i>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-red-800">
+              <%= pluralize(poll.errors.count, "erro") %> impedem esta enquete de ser salva:
+            </h3>
+            <ul class="mt-2 text-sm text-red-700 list-disc list-inside space-y-1">
+              <% poll.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="p-6">
+      <!-- Coluna 1 -->
+      <div class="space-y-6">
+        <div>
+          <%= form.label :title, class: "block text-sm font-medium text-gray-700 mb-2" do %>
+            Título da Enquete <span class="text-red-500">*</span>
+          <% end %>
+          <%= form.text_field :title, class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200", placeholder: "Digite o título da enquete", required: true %>
+        </div>
+
+        <div>
+          <%= form.label :description, class: "block text-sm font-medium text-gray-700 mb-2" do %>
+            Descrição <span class="text-red-500">*</span>
+          <% end %>
+          <%= form.text_area :description, rows: 4, class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200", placeholder: "Descreva a enquete (opcional)", required: true %>
+        </div>
+
+        <!-- Campo para adicionar opções -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Opções de Votação <span class="text-red-500">*</span></label>
+          <div id="options-container" class="space-y-3">
+            <% 4.times do |i| %>
+              <div class="flex items-center option-field">
+                <input type="text" name="poll[options_attributes][][text]" 
+                      class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition duration-200" 
+                      placeholder="Digite uma opção" <%= 'required' if i < 2 %>>
+              </div>
+            <% end %>
+        </div>
+      </div>
+
+      <!-- Coluna 2 -->
+      <div class="space-y-6">
+        <div>
+          <%= form.label :poll_type, class: "block text-sm font-medium text-gray-700 mb-2" do %>
+            Tipo de Enquete <span class="text-red-500">*</span>
+          <% end %>
+          <%= form.select :poll_type, 
+            [['Votação Única', 'single_choice'], ['Votação Múltipla', 'multiple_choice']], 
+            { prompt: "Selecione o tipo" }, 
+            { class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200", required: true } %>
+        </div>
+
+        <div>
+          <%= form.label :status, class: "block text-sm font-medium text-gray-700 mb-2" do %>
+            Status <span class="text-red-500">*</span>
+          <% end %>
+          <%= form.select :status, 
+            [['Aberta', 'open'], ['Fechada', 'closed']], 
+            { prompt: "Selecione o status" }, 
+            { class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-200", required: true } %>
+        </div>
+
+
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <div class="bg-gray-50 border-l-4 border-gray-400 p-4 rounded">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <i class="fas fa-info-circle text-black"></i>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-black">
+                Esta enquete será criada por: <strong><%= current_user.name %></strong>
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="pt-6 border-t border-gray-200 items-center justify-center flex">
+      <%= form.submit "Criar Enquete", class: "w-full md:w-auto bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 cursor-pointer" %>
+    </div>
+  <% end %>
+</div>

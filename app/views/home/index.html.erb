@@ -1,0 +1,98 @@
+<!-- Conteúdo Principal -->
+<div class="w-full md:w-3/4 ml-10">
+  
+  <!-- Cabeçalho -->
+  <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">Bem-vindo, <span class="text-orange-600"><%= current_user.name %></span> ao Sistema de Enquetes</h1>
+    <p class="text-gray-600">Escolha uma das opções abaixo para navegar:</p>
+  </div>
+
+  <% if flash[:alert] %>
+    <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-4 rounded">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <i class="fas fa-exclamation-circle text-red-400"></i>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-red-700"><%= flash[:alert] %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Estatísticas Rápidas -->
+  <div class="bg-white rounded-xl shadow-md p-6 mb-10">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Estatísticas Rápidas</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-orange-50 p-4 rounded-lg">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mr-3">
+            <i class="fas fa-poll text-orange-600"></i>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-gray-800"><%= Poll.count %></p>
+            <p class="text-sm text-gray-600">Enquetes cadastradas</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-amber-50 p-4 rounded-lg">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center mr-3">
+            <i class="fas fa-vote-yea text-amber-600"></i>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-gray-800"><%= Vote.count %></p>
+            <p class="text-sm text-gray-600">Votos totais</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-yellow-50 p-4 rounded-lg">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mr-3">
+            <i class="fas fa-users text-yellow-600"></i>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-gray-800"><%= User.count %></p>
+            <p class="text-sm text-gray-600">Usuários ativos</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards em Linha -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Card Enquetes -->
+    <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-4">
+        <i class="fas fa-poll text-orange-600 text-2xl"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Enquetes</h3>
+      <p class="text-gray-600 mb-4">Crie e gerencie suas enquetes</p>
+      <%= link_to 'Acessar Enquetes', polls_path, class: 'px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors duration-300' %>
+    </div>
+
+    <!-- Card Sua enquetes -->
+    <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-100 rounded-full mb-4">
+        <i class="fas fa-vote-yea text-amber-600 text-2xl"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Suas enquetes</h3>
+      <p class="text-gray-600 mb-4">Acesse e visualize suas enquetes</p>
+      <%= link_to 'Acessar suas enquetes', my_polls_path, class: 'px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition-colors duration-300' %>
+    </div>
+
+    <!-- Card Usuários -->
+    <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
+        <i class="fas fa-users text-yellow-600 text-2xl"></i>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Usuários</h3>
+      <p class="text-gray-600 mb-4">Gerencie os usuários do sistema</p>
+      <%= link_to 'Acessar Usuários', users_path, class: 'px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-lg transition-colors duration-300' %>
+    </div>
+  </div>
+
+  
+  
+</div>

@@ -1,0 +1,58 @@
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">Minhas Enquetes Votadas</h1>
+
+  <% if @polls.any? %>
+    <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-1">
+      <% @polls.each do |poll| %>
+        <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6 border border-gray-100">
+          <div class="flex flex-col space-y-4">
+            <!-- Header -->
+            <div class="flex items-start justify-between">
+              <h2 class="text-xl font-semibold text-gray-900 leading-tight">
+                <%= poll.title %>
+              </h2>
+              <span class="ml-6 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
+                <%= poll.status == 'open' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                <%= poll.status == 'open' ? 'Aberta' : 'Fechada' %>
+              </span>
+            </div>
+
+            <!-- Description -->
+            <% if poll.description.present? %>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                <%= truncate(poll.description, length: 120) %>
+              </p>
+            <% end %>
+
+            <!-- Footer -->
+            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+              <div class="text-sm text-gray-500">
+                <% if poll.user %>
+                  <span class="flex items-center">
+                    <i class="fas fa-user mr-2"></i>
+                    Criada por <%= poll.user.name %>
+                  </span>
+                <% end %>
+              </div>
+
+              <%= link_to poll_path(poll), 
+                  class: "inline-flex items-center px-4 py-2 bg-orange-600 text-white font-medium rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors duration-200" do %>
+                    <i class="fas fa-eye mr-2"></i> Ver Enquete
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-12">
+      <div class="mx-auto w-24 h-24 mb-4">
+        <i class="fas fa-file fa-6x mb-2"></i>
+      </div>
+      <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhuma enquete votada</h3>
+      <p class="text-gray-600 mb-6">Você ainda não participou de nenhuma enquete.</p>
+      <%= link_to "Explorar enquetes", polls_path, 
+            class: "inline-flex items-center px-6 py-3 bg-orange-600 text-white font-medium rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors duration-200" %>
+    </div>
+  <% end %>
+</div>

@@ -1,7 +1,6 @@
-# README
+# Sistema de enquete
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aqui está o passo a passo utilizado para a construção do projeto, e como rodar ele.
 
 Things you may want to cover:
 

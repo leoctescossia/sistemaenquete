@@ -133,7 +133,6 @@ class PollsController < ApplicationController
       @poll = Poll.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def poll_params
       # params.require(:poll).permit(:title, :description, :poll_type, :status, :user_id, options_attributes: [:id, :text, :_destroy])
       params.require(:poll).permit(:title, :description, :poll_type, :status, options_attributes: [:id, :text, :_destroy])

@@ -28,6 +28,10 @@ Aqui está o passo a passo utilizado para a construção do projeto, e como roda
 - HTML5 + ERB
 
 
+# Imagens do sistema
+![Dashboard Admin](/app/assets/images/Captura%20de%20tela%202025-08-27%20081729.png)
+
+
 # Como configurar o create do Banco de Dados com o seu PostgreSQL
 
 
@@ -69,6 +73,23 @@ Enquetes abertas permitem votação (Múltiplas ou Única)
 ```
 Exclusão/Inativar usuário fecha suas enquetes
 ```
+
+
+## Paineis Usuário
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="/app/assets/images/Captura de tela 2025-08-25 201021.png" alt="Usuários" style="width: 40%; height: auto; object-fit: cover;" />
+  <img src="/app/assets/images/Captura de tela 2025-08-25 201030.png" alt="User" style="width: 40%; height: auto; object-fit: cover;" />
+  <img src="/app/assets/images/Captura de tela 2025-08-25 201059.png" alt="Criar-User" style="width: 40%; height: auto; object-fit: cover;" />
+  <img src="/app/assets/images/Captura de tela 2025-08-25 201049.png" alt="User" style="width: 40%; height: auto; object-fit: cover;" />
+</div>
+
+## Enquetes
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="/app/assets/images/Captura de tela 2025-08-27 081743.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
+  <img src="/app/assets/images/Captura de tela 2025-08-25 204300.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
+  <img src="/app/assets/images/Captura de tela 2025-08-25 204439.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
+  <img src="/app/assets/images/Captura de tela 2025-08-25 204439.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
+</div>
 
 
 ## 👥 Usuários de Teste

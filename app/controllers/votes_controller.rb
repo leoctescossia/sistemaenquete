@@ -11,7 +11,6 @@ class VotesController < ApplicationController
 
   def create
     puts "DEBUG: Parâmetros recebidos: #{params.inspect}"
-    puts "DEBUG: Usuário atual: #{current_user.inspect}"
 
     if params[:option_id] # Votação única
       option = Option.find(params[:option_id])

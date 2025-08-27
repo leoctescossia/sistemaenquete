@@ -121,3 +121,6 @@ User.create!(
     active: true
 )
 ```
+
+## Diagrama Relacional
+![Diagrama Relacional](/app/assets/images/dunnas.png)

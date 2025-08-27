@@ -35,24 +35,24 @@ Aqui está o passo a passo utilizado para a construção do projeto, e como roda
 # Como configurar o create do Banco de Dados com o seu PostgreSQL
 
 
-1 - git clone https://github.com/leoctescossia/sistemaenquete
-2 - cd sistemaenquete
-3 - bundle install/yarn install
-4 - Descubra seu usuário do PostgreSQL e sua senha de acesso
-5 - Modifique e troque os:
+- git clone https://github.com/leoctescossia/sistemaenquete
+- cd sistemaenquete
+- bundle install/yarn install
+- Descubra seu usuário do PostgreSQL e sua senha de acesso
+- Modifique e troque os:
 ```
 username, password.
 ```
 Ambos estarão comentados.
-6 - Siga os próximos passos
-7 - rails db:create
-8 - rails db:migrate
-9 - (Opcional) Caso queira executar a seed.
+- Siga os próximos passos
+- rails db:create
+- rails db:migrate
+- (Opcional) Caso queira executar a seed.
 ```
 rails db:seed
 ```
-9 - rails server
-10 - (Opcional, mas recomendo para ver melhor o design do tailwindcss): rails tailwindcss:watch
+- rails server
+- (Opcional, mas recomendo para ver melhor o design do tailwindcss): rails tailwindcss:watch
 
 # Regras Definidas
 ```
@@ -71,8 +71,15 @@ Exibir as próprias enquetes, e quais enquetes votou
 Enquetes abertas permitem votação (Múltiplas ou Única)
 ```
 ```
-Exclusão/Inativar usuário fecha suas enquetes
+Exclusão/Inativar usuário fecha suas enquetes (Optei por utilizar o método de inativação ao invés da exclusão. Mantém os registros das enquetes, e mantém o usuário no sistema, permitindo a reativação por parte do Admin.)
 ```
+
+## Pontos que poderiam ser melhorados
+- Experiência do usuário: Adicionar mais páginações. Modais de conclusão e exclusão. Mais filtros de busca
+- Prazo de data: Permitir que o usuário adicione uma data limite, e quando a data chegar, a enquete ser encerrada automaticamente.
+- Aumentar o número de opções de votação, para além de 4 opções.
+
+
 
 
 ## Paineis Usuário

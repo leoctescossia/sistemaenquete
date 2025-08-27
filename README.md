@@ -81,6 +81,7 @@ Exclusão/Inativar usuário fecha suas enquetes
   <img src="/app/assets/images/Captura de tela 2025-08-25 201030.png" alt="User" style="width: 40%; height: auto; object-fit: cover;" />
   <img src="/app/assets/images/Captura de tela 2025-08-25 201059.png" alt="Criar-User" style="width: 40%; height: auto; object-fit: cover;" />
   <img src="/app/assets/images/Captura de tela 2025-08-25 201049.png" alt="User" style="width: 40%; height: auto; object-fit: cover;" />
+  <img src="/app/assets/images/Captura de tela 2025-08-25 222052.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
 </div>
 
 ## Enquetes
@@ -88,7 +89,14 @@ Exclusão/Inativar usuário fecha suas enquetes
   <img src="/app/assets/images/Captura de tela 2025-08-27 081743.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
   <img src="/app/assets/images/Captura de tela 2025-08-25 204300.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
   <img src="/app/assets/images/Captura de tela 2025-08-25 204439.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
-  <img src="/app/assets/images/Captura de tela 2025-08-25 204439.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
+  <img src="/app/assets/images/Captura de tela 2025-08-27 082136.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
+  <img src="/app/assets/images/Captura de tela 2025-08-27 084215.png" alt="Enquetes" style="width: 40%; height: auto; object-fit: cover;" />
+</div>
+
+## Login
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="/app/assets/images/Captura de tela 2025-08-27 084204.png" alt="Login" style="width: 40%; height: auto; object-fit: cover;" />
+  <img src="/app/assets/images/Captura de tela 2025-08-27 084240.png" alt="Login" style="width: 40%; height: auto; object-fit: cover;" />
 </div>
 
 

@@ -30,7 +30,14 @@
 
           <div>
             <p class="text-sm font-medium text-gray-500">Status</p>
-            <p class="text-gray-800"><%= @user.active === true ? 'Ativo' : 'Inativo' %></p>
+            <!-- Que lógica horrível para funcionar -->
+            <% status_user   = @user.active? %>
+            <% status_text = status_user ? 'Ativo' : 'Inativo' %>
+            <% status_tailwind  = status_user ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>
+
+            <p class="inline-block px-2 py-1 rounded text-sm font-medium <%= status_tailwind %>">
+              <%= status_text %>
+            </p>
 
           </div>
 

@@ -52,6 +52,12 @@ Ambos estarão comentados.
 rails db:seed
 ```
 - rails server
+- Instalar o tailwindcss no ruby on rails:
+```
+./bin/bundle add tailwindcss-ruby
+./bin/bundle add tailwindcss-rails
+./bin/rails tailwindcss:install
+```
 - (Opcional, mas recomendo para ver melhor o design do tailwindcss): rails tailwindcss:watch
 
 # Regras Definidas

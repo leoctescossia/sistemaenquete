@@ -1,4 +1,6 @@
 class PollsController < ApplicationController
+  # está logado
+  before_action :require_user
   before_action :set_poll, only: %i[ show edit update destroy close ]
   before_action :authenticate_user!, except: [:index, :show]
 
@@ -125,6 +127,10 @@ class PollsController < ApplicationController
   def close
     @poll.close!
     redirect_to @poll, notice: "Enquete encerrada com sucesso."
+  end
+
+  def require_user
+    redirect_to root_path, alert: "Acesso negado." unless current_user&.user?
   end
 
   private

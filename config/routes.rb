@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get "home/index"
 
-  devise_for :users
+  # para usuários e não libera o cadastro próprio do devise
+  devise_for :users, skip: [:registrations]
 
   scope '/admin' do
     resources :users, only: [:index, :new, :edit, :show, :create, :destroy] do
